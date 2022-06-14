@@ -1,0 +1,8 @@
+package com.cts.sbd.ui;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class ApplicationRunner {
+
+}

@@ -1,0 +1,13 @@
+package com.cts.sbd.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class GreetingService {
+
+	private String greeting="Hello";
+	
+	public String greetUser(String userName) {
+		return String.format("%s %s!", greeting,userName);
+	}
+}
