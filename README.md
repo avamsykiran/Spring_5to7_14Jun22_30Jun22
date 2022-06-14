@@ -18,7 +18,7 @@ Spring Web, REST on Spring Boot
 
         Spring Boot Projects are calle dSpring Starter Projects, and
         Spring Boot offers starter-dependencies for each and every spring module,
-        these starter dependencies will contain the respective moduel along with 
+        these starter dependencies will contain the respective module along with 
         the minmum config....
 
 
@@ -32,3 +32,36 @@ Spring Web, REST on Spring Boot
         Spring Tool Suite - Spring Starter Project wizard
         Spring Boot CLI
         SpringInitializr from http://start.spring.io
+
+    Spring Data JPA
+
+        is a spring framework module that offer dynamic implementation to 
+        repositories.
+
+        CrudRepository
+            | - JpaRepository
+
+        @Entity
+        @Table(name=emps)
+        class Employee {
+            @Id
+            @GeenratedValue(strategy=AUTO)
+            private Long empId;
+            private String empName;
+            private Double salary;
+            private LocalDate joinDate;
+
+            //construcotrs, getters and setters...
+        }
+
+        public interface EmployeeRepo extends JpaRepository<Employee,Long> {
+
+        }
+
+        EmployeeRepo ::
+            Employee save(Employee entity);
+            boolean existsById(Long id);
+            Optional<Employee> findById(Long id)
+            List<Employee> findAll()
+            void deleteById(Long id)
+            
