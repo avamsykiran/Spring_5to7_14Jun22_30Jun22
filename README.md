@@ -48,14 +48,21 @@ Spring Web, REST on Spring Boot
             @GeenratedValue(strategy=AUTO)
             private Long empId;
             private String empName;
+            private String emailId;
             private Double salary;
             private LocalDate joinDate;
 
-            //construcotrs, getters and setters...
+            //constructors, getters and setters...
         }
 
         public interface EmployeeRepo extends JpaRepository<Employee,Long> {
+            
+            boolean existsByEmailId(String emailId);
+            Optional<Employee> findByEmailId(String emailId);
+            List<Employee> findAllByEmpName(String empName);
 
+            @Query("SELECT e FROM Employee WHERE e.salary BETWEEN :lb AND :ub")
+            List<Employee> getEmployeesEarningInTheRange(Double lb,Double ub);
         }
 
         EmployeeRepo ::
@@ -64,4 +71,70 @@ Spring Web, REST on Spring Boot
             Optional<Employee> findById(Long id)
             List<Employee> findAll()
             void deleteById(Long id)
+
+    CaseStudy - TaskManager
+    --------------------------------------
+
+        is a single user console based application to record and manage the tasks
+        to be done by a user:
+
+            A task is a record attibuted by taskId,taskDescription,assignedDate and status (PENDING/DONE)
+
+            Requirement are 
+                able to add a task
+                retrive all tasks
+                retrive all pending tasks
+                retrive all completed tasks
+                change the status of a task
             
+    Spring Web
+
+        is a spring framework module that can be used on a MVC archetecure to 
+        develop either a web application or a rest api
+
+        Dynamic Web MVC Application using Spring Web
+
+            Single Front Controller MVC Design Pattern
+
+              Repos <----> Services <----> Controllers <--model-- FrontController <---Reqeust-- Client
+                                                |           (urlResolver)  | |
+                                                |                          | |
+                                                |------Model & ViewName -->| |
+                                                              (ViewResolver) |
+                                                                             ↓ (model)
+                                                                            View (s) -----Response--->
+
+            FrontController         DispatcherServlet       Dispatcher Servlket config is automated as on Spring Boot
+
+            UrlResolver
+                BeanNameUrlResolver
+                ControllerNameUrlResolver
+                SimpleUrlResolver           is picked by auto-configuration of Spring Boot
+
+                        @RequestMapping(value={"","",""},method=RequestMethod.GET/POST/....)
+                            @GetMapping
+                            @PostMapping
+                            ...............
+
+            ViewResolver
+                MessageBeanResourceViewResolver
+                XmlResourceViewResolver
+                InternalResourceViewResolver        is picked by auto-configuration of Spring Boot
+
+                        prefix
+                        suffix
+
+                        actualview = prefix + viewName + suffix
+
+            
+            Controller          is a POJO marked with @Controller.
+                                the controller houses method that handle an incoming request and those methods are called actions.
+                                each action is expected to be marked with @RequestMapping or its sub-types
+                                each action is expected to return a viewName as a String or an object of ModelAndView class.
+
+
+            Views               JSP / Thymeleaf
+                                                        
+
+
+        Rest-API Application using Spring Web
