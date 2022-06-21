@@ -135,6 +135,9 @@ Spring Web, REST on Spring Boot
 
             Views               JSP / Thymeleaf
                                                         
+            QueryString         @RequestParam
 
+            FormData            @RequestParam
+                                @ModelAttribute
 
         Rest-API Application using Spring Web
