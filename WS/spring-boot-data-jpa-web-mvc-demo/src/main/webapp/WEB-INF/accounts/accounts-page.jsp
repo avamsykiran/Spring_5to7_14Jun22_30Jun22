@@ -22,6 +22,7 @@
 							<th>Full Name</th>
 							<th>Email Id</th>
 							<th>Balance</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -31,6 +32,10 @@
 								<td>${ah.fullName }</td>
 								<td>${ah.emailId }</td>
 								<td>${ah.currentBalance }</td>
+								<td>
+									<a href="/accounts/edit?ahId=${ah.ahId}" > EDIT </a> <span> | </span>
+									<a href="/accounts/delete?ahId=${ah.ahId}" > DELETE </a>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

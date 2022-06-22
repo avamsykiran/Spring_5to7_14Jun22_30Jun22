@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="account_holders")
@@ -14,10 +16,16 @@ public class AccountHolder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ahId;
+	
 	@Column(name="fnm",nullable = false)
+	@NotBlank(message = "FullName can not be left blank")
 	private String fullName;
+	
+	@NotBlank(message = "EmailId can not be left blank")
+	@Email(message = "Email Id is not valid")
 	@Column(name="eid",nullable = false,unique = true)
 	private String emailId;
+	
 	@Column(name = "cb")
 	private Double currentBalance;
 	

@@ -8,6 +8,6 @@ public interface AccountHolderService {
 
 	List<AccountHolder> getAll();
 	AccountHolder getById(Long ahId);
-	AccountHolder add(AccountHolder ah);
+	AccountHolder save(AccountHolder ah);
 	void deleteById(Long ahId);
 }

@@ -25,7 +25,7 @@ public class AccountHolderServiceImpl implements AccountHolderService {
 	}
 
 	@Override
-	public AccountHolder add(AccountHolder ah) {
+	public AccountHolder save(AccountHolder ah) {
 		return ahRepo.save(ah);
 	}
 
