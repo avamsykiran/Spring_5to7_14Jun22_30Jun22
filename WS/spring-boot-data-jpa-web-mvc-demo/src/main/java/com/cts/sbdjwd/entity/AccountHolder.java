@@ -27,7 +27,7 @@ public class AccountHolder {
 	private String emailId;
 	
 	@Column(name = "cb")
-	private Double currentBalance;
+	private Double currentBalance=0.0;
 	
 	public AccountHolder() {
 		// TODO Auto-generated constructor stub

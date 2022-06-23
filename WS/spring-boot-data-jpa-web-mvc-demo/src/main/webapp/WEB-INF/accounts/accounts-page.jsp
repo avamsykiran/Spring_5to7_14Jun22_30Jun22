@@ -34,7 +34,8 @@
 								<td>${ah.currentBalance }</td>
 								<td>
 									<a href="/accounts/edit?ahId=${ah.ahId}" > EDIT </a> <span> | </span>
-									<a href="/accounts/delete?ahId=${ah.ahId}" > DELETE </a>
+									<a href="/accounts/delete?ahId=${ah.ahId}" > DELETE </a><span> | </span>
+									<a href="/txns?ahId=${ah.ahId}" > STATEMENT </a>
 								</td>
 							</tr>
 						</c:forEach>
