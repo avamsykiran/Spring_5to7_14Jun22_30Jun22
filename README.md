@@ -141,3 +141,26 @@ Spring Web, REST on Spring Boot
                                 @ModelAttribute
 
         Rest-API Application using Spring Web
+
+Case Study: Inventory Management Portal
+-------------------------------------------------------------
+
+    Navigation Bar we will have three links
+        Home        for home page (ideally an empty page for landing)
+        Items       Display the list of items page with detials (itemCode,itemName,unitOfMeasure,rate,stock)
+        New ITem    Displaya form to add a new itme and once the form is submitted 
+                    the item has to be added and the 'list of items page' must appear
+
+            on each item row we need a link to edit tiem, delete itme and manage stock
+
+            'manage stock' will take us to stock-page having the below details
+
+                txnId,party name,stock in,stock out
+
+            'mange stock' page we need a form to add a stock transaction.
+
+    
+
+
+
+

@@ -64,11 +64,21 @@
 								<td>${t.txnId }</td>
 								<td>${t.txnDate }</td>
 								<td>${t.desp }</td>
-								<td>${t.type==TxnType.CREDIT?t.amount+"":"" }</td>
-								<td>${t.type!=TxnType.CREDIT?t.amount+"":"" }</td>
+								<td style="text-align:right">${t.type==TxnType.CREDIT?t.amount+"":"" }</td>
+								<td style="text-align:right">${t.type!=TxnType.CREDIT?t.amount+"":"" }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="4" style="text-align:right">
+							 Current Balance
+							</th>
+							<th style="text-align:right">
+								${ah.currentBalance }
+							</th>
+						</tr>
+					</tfoot>
 				</table>
 			</c:otherwise>
 		</c:choose>

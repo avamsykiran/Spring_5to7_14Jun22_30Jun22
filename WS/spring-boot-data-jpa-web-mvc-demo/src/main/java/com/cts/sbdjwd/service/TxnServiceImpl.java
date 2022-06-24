@@ -43,7 +43,8 @@ public class TxnServiceImpl implements TxnService {
 		txn.setHolder(ah);
 		double amt = txn.getType()==TxnType.CREDIT?txn.getAmount():-txn.getAmount();
 		
-		ahRepo.updateBalance(ahId, ah.getCurrentBalance()+amt);
+		ah.setCurrentBalance(ah.getCurrentBalance()+amt);	
+		ahRepo.save(ah);
 		
 		return txnRepo.save(txn);
 	}
@@ -55,7 +56,8 @@ public class TxnServiceImpl implements TxnService {
 		AccountHolder ah = txn.getHolder();
 		double amt = txn.getType()==TxnType.CREDIT?-txn.getAmount():txn.getAmount();
 		
-		ahRepo.updateBalance(ah.getAhId(), ah.getCurrentBalance()+amt);
+		ah.setCurrentBalance(ah.getCurrentBalance()+amt);
+		ahRepo.save(ah);
 		
 		txnRepo.deleteById(txnId);
 	}
