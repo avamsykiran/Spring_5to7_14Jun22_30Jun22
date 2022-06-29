@@ -142,6 +142,70 @@ Spring Web, REST on Spring Boot
 
         Rest-API Application using Spring Web
 
+            WebService
+
+                bussiness logic mounted on a server so that different UI appolication
+                can invoek that bussienss logic from remote ditrubuted system.
+
+                SOAP - Simple Object Access Protocol
+                        xml as media of exchange
+
+                REST API - REpresentational State Transfer
+
+                        the rest api operates on http protocol,
+                      
+                        + http protocol is already a proven protocol that supports a vide
+                            variaty of data formats including numbers and string, binary data, iamges and other media ..etc
+
+                        + http protocol already support a variety of 'request http methods' like
+                            get,put,post,trace,...etc.,
+
+                            these methods were exploited and mapped to each CRUD operation that brought
+                            doen the need for a large number of urls representing different crud operations.
+
+                            Retriving   /emps   GET
+                            Inserting   /emps   POST
+                            Updating    /emps   PUT
+                            Deleteing   /emps   DELETE
+
+                        + http protocol already support a HTTP STATUS system to indicate the status of
+                            the request and response.
+
+                            this status system is also adopted to provided proper feedback for
+                            each incoming request
+
+
+                            100-199     to indicate that a request is recived and is under process
+                            300-399     to indicate that a resposne is being redirected for different reasons
+
+                            200-299     to indicate that a request is processed successfully.
+                                            GET is success means retrival is sucessful & is indicated by 200-OK
+                                            POST is success means insertion is sucessful & is indicated by 201-CREATED
+                                            PUT is success means updation is sucessful & is indicated by 202-ACCEPTED
+                                            DELETE is success means deletion is sucessful & is indicated by 204-NO CONTENT
+                            
+                            400-499     to indiacate the the request could not be processed due to an issue from the client
+                                            GET is failed means retrival fails and is indicted by 404-NOT FOUND
+                                            DELETE is failed means deletion fails and is indicted by 404-NOT FOUND
+                                            POST is fialed means insertion fails and is indicated by 400-BAD REQUEST
+                                            PUT is fialed means updatation fails and is indicated by 400-BAD REQUEST
+
+                            500-599     to indiacate the the request could not be processed due to an issue from the server
+
+                                            for any reson like bugs or exceptions that occur and due to which
+                                            the request could not be processed we call it a server side issue
+                                            and is indicated by 500-INTERNAL_SERVER_ERROR
+                                      
+                    @RestController     =   @Controller + @ResponseBody
+
+                    REST Application    =   MVC - V = (No Views, Only models and controllers)
+
+                    Rest Clients are software used to check the rest-api
+                        Postman
+                        Insomnia ..etc.,
+
+                    
+
 Case Study: Inventory Management Portal
 -------------------------------------------------------------
 
