@@ -1,75 +1,45 @@
 package com.cts.sbdjrd.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.sbdjrd.entity.AccountHolder;
 import com.cts.sbdjrd.entity.Txn;
 import com.cts.sbdjrd.exception.AccountHolderNotFoundException;
+import com.cts.sbdjrd.exception.InvalidTxnException;
 import com.cts.sbdjrd.service.AccountHolderService;
 import com.cts.sbdjrd.service.TxnService;
 
-@Controller
-@RequestMapping("/txns")
-@Scope("session")
+@RestController
+@RequestMapping("/accounts/{ahId}/txns")
 public class TxnsController {
-	
-	private AccountHolder ah;
-	
-	@Autowired
-	private AccountHolderService ahService;
-	
+
 	@Autowired
 	private TxnService txnService;
-	
-	@GetMapping
-	public ModelAndView defaultGetRequestAction(@RequestParam(name="ahId",required = false)Long ahId) {
-		
-		ModelAndView mv = null;
-		
-		if(ahId!=null) {
-			this.ah = ahService.getById(ahId); 
-		}
-		
-		if(ah!=null) {
-			mv = new ModelAndView("txns/txns-page");
-			mv.addObject("ah",ah);
-			mv.addObject("txn",new Txn());
-			mv.addObject("txns",txnService.getAllByAhId(ahId));
-		}else {
-			mv=new ModelAndView("/accounts");
-		}
-		
-		return mv;
-	}
-	
-	@PostMapping("/add")
-	public ModelAndView doSaveTxn(@ModelAttribute("txn") @Valid Txn txn,BindingResult br) throws AccountHolderNotFoundException {
-		ModelAndView mv = new ModelAndView("txns/txns-page");
 
-		mv.addObject("ah",ah);
-	
+	@GetMapping
+	public ResponseEntity<List<Txn>> defaultGetRequestAction(@PathVariable("ahId") Long ahId) {
+		return new ResponseEntity<>(txnService.getAllByAhId(ahId), HttpStatus.OK);
+	}
+
+	@PostMapping
+	public ResponseEntity<Txn> doSaveTxn(@PathVariable("ahId")Long ahId,@RequestBody @Valid Txn txn,BindingResult br) throws AccountHolderNotFoundException, InvalidTxnException {
 		if(br.hasErrors()) {
-			mv.addObject("txn",txn);	
-		}else {
-			txnService.add(ah.getAhId(), txn);
-			mv.addObject("txn",new Txn());
+			throw new InvalidTxnException(
+			br.getAllErrors().stream().map(err -> err.getDefaultMessage()).reduce((m1,m2) -> m1+","+m2).orElse(""));	
 		}
 		
-		mv.addObject("txns",txnService.getAllByAhId(ah.getAhId()));
-		
-		return mv;
+		return new ResponseEntity<>(txnService.add(ahId, txn),HttpStatus.CREATED);
 	}
 }
-
-

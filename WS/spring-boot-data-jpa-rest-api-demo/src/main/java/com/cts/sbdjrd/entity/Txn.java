@@ -17,6 +17,8 @@ import javax.validation.constraints.PastOrPresent;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="txns")
 public class Txn {
@@ -36,6 +38,7 @@ public class Txn {
 	@Enumerated(EnumType.STRING)
 	private TxnType type;
 	
+	@JsonIgnore
 	@ManyToOne
 	private AccountHolder holder;
 	
